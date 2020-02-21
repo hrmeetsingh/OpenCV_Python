@@ -11,17 +11,19 @@ def getTrackValue(value):
 
 c = cv2.VideoCapture(0)
 width,height = c.get(3),c.get(4)
-print "frame width and height : ", width, height
+print("frame width and height : ", width, height)
 
 cv2.namedWindow('Output')
 cv2.namedWindow('Trackbars', cv2.WINDOW_NORMAL)
 cv2.createTrackbar('Hue_Low','Trackbars',0,255, getTrackValue)
-cv2.createTrackbar('Saturation_Low','Trackbars',0,255, getTrackValue)
-cv2.createTrackbar('Value_Low','Trackbars',0,255, getTrackValue)
-
 cv2.createTrackbar('Hue_High','Trackbars',0,255, getTrackValue)
+
+cv2.createTrackbar('Saturation_Low','Trackbars',0,255, getTrackValue)
 cv2.createTrackbar('Saturation_High','Trackbars',0,255, getTrackValue)
+
+cv2.createTrackbar('Value_Low','Trackbars',0,255, getTrackValue)
 cv2.createTrackbar('Value_High','Trackbars',0,255, getTrackValue)
+
 cv2.createTrackbar('Caliberate','Trackbars',0,1, getTrackValue)
 
 while(1):
@@ -33,7 +35,7 @@ while(1):
     erode = cv2.erode(thrImg,None,iterations = 3)
     dilate = cv2.dilate(erode,None,iterations = 10)
 
-    image,contours,hierarchy = cv2.findContours(dilate,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+    contours,hierarchy = cv2.findContours(dilate,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
     for cnt in contours:
         x,y,w,h = cv2.boundingRect(cnt)
